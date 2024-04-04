@@ -1,0 +1,63 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<div class="row">
+  <div class="col-md-3 mt-3 bg-light p-3">
+    <h5>Filter by Category</h5>
+    <hr> 
+    <p><a href="/index" >All</a></p>
+    <p><a href="/catfilter/1" >By Moblie</a></p>
+    <p><a href="/catfilter/2" >By Clothes</a></p>
+    <p><a href="/catfilter/3" >By Shoes</a></p>
+    <h5>Filter by Price</h5>
+    <hr>
+    <form method="GET" action="/range">
+      <div class="mb-3">
+        <label for="Input1" class="form-label">Min:</label>
+        <input type="number" class="form-control" id="Input1" name="umin" placeholder="min price">
+      </div>
+        
+      <div class="mb-3">
+        <label for="Input2" class="form-label">Max:</label>
+        <input type="number" class="form-control" id="Input2" name="umax" placeholder="max price">
+      </div>
+        
+      <div class="mb-3">
+        <input type="submit" class="btn btn-info" value="Search">
+      </div>
+    </form>
+    <h5 class="mt-2">Sort by Price</h5>
+    <hr>
+    <p><a href="/sort/1" class="anchor">High to Low</a></p>
+    <p><a href="/sort/0" class="anchor">Low to High</a></p>
+  </div>
+</div>
+
+<div class="col-md-9 mt-3 bg-light p-3">
+  <div class="row">
+    {% for x in products %}
+    <div class="col-md-3 ">
+      <div class="card" style="width: 100%;">
+        <img src="{{x.pimage.url}}" class="card-img-top" width="20%"height="20%" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{x.name}}</h5>
+          <p class="card-text">Rs.{{x.price}}</p>
+          {% if x.cat == 1 %}
+                      <p class="card-text">Mobile</p>
+                  {% elif x.cat == 2 %}
+                      <p class="card-text">Shoes</p>
+                  {% else %}
+                      <p class="card-text">Cloths</p>
+                  {% endif %}    
+          <a href="/product_details/{{x.id}}" class="btn btn-success">See details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock 'main' %}
+
+
+                               

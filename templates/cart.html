@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+
+<div class="row">
+  <div class="col-9 p-2">
+    <h5 class="bg-info text-white mt-3">Customer details</h5>
+    {% for x in products %}
+    {% if forloop.counter == 1 %}
+    <p><strong>Name :</strong>&nbsp;&nbsp;{{x.uid.first_name}}</p>
+    <p><strong>Mobile :</strong>&nbsp;&nbsp; 9574011360</p>
+    <p><strong>Email:</strong>&nbsp;&nbsp;{{x.uid.email}}</p>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <div class="col-3">
+    <h5 class="bg-info text-white mt-3">Total Amount</h5>
+    <p><strong>Total</strong> (Total 1) <strong>:</strong>&nbsp;&nbsp;&nbsp;Rs.{{total}}</p>
+    <p><strong>Total Amount : </strong>&nbsp;&nbsp;{{toatl}}</p>
+    <a href="/placeorder "><button class="btn btn-secondary">Place Order</button></a>
+  </div>
+<div>
+  <h5 class="bg-info text-white mt-3">Cart-details</h5>
+<div class="row">
+  {% for x in products %}
+    <div class="col=md-4">
+      <img src="{{x.pid.pimage.url }}" width="100%" height="100%" alt="img">
+
+    </div>
+    <div class="col-md-8">
+      <p><strong>Product Name:</strong>&nbsp;&nbsp;{{x.pid.name}}</p>
+      <p><strong>Price:</strong>&nbsp;&nbsp;{{x.pid.price}}</p>
+      {% if x.pid.cat == 1 %}
+      <p><strong>Category:</strong>&nbsp;&nbsp;Anti-aging creame</p>
+      {% elif x.pid.cat == 2 %}
+      <p><strong>Category:</strong>&nbsp;&nbsp;Anti-aging creame</p>
+      {% else %}
+      <p><strong>Category:</strong>&nbsp;&nbsp;Anti-aging creame</p>
+      {% endif %}
+      <p><strong>Product Details:</strong>&nbsp;&nbsp;{{x.pid.pdetails}}</p>
+
+      <p>
+        <strong>QTY:</strong>
+        <a href="/updateqty/0/{{x.id}}"><button class="btn btn-danger">-</button></a>
+        <input type="number" value="{{x.qty}}">
+        <a href="/updateqty/1/{{x.id}}"><button class="btn btn-success">+</button></a>
+    </p>
+
+    <a href="/remove/{{x.id}}"><button class="btn btn-danger">Remove</button></a>
+      
+
+      {% endfor %}
+
+    </div>
+</div>
+
+{% endblock 'main' %}
+
+                  
+                                        <!--footer start-->
+                
